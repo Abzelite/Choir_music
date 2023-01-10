@@ -26,8 +26,8 @@ const li = document.getElementsByClassName("lista_muz")
 //right buttons
 const allbutton = document.querySelector('.all_button')
 const solobutton = document.querySelector('.solo_button')
-const solovo = document.querySelector('.solo')
-const allvo = document.querySelector('.all')
+const solovo = document.querySelector('#solo')
+const allvo = document.querySelector('#all')
 
 const saveaudio = document.querySelector('.save_audio')
 const savenotes = document.querySelector('.save_notes')
@@ -112,7 +112,7 @@ async function loadSong(song, voice) {
     let fil = checkFileExist(`notes/${song}/${song+'_'+voice}.mp3`)
     console.log(fil)
     pauseSong();
-    toBegin()
+    toBegin();
     if(fil) {
 
         audio_song.src = `notes/${song}/${song + '_' + voice}.mp3`
@@ -407,8 +407,8 @@ function setPlaybackRate(el) {
 
 function playAllVoices() {
 
-    solovo.style.content = 'url("../resources/images/solo.png")'
-    allvo.style.content = 'url("../resources/images/all2.png")'
+    $("#solo").attr('src', '../resources/images/solo.png');
+    $("#all").attr('src', '../resources/images/all2.png');
     let song = localStorage.getItem("SI");
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + 'all'}.mp3`
@@ -421,8 +421,8 @@ function playAllVoices() {
 }
 
 function playOneVoice() {
-    solovo.style.content = 'url("../resources/images/solo2.png")'
-    allvo.style.content = 'url("../resources/images/all.png")'
+    $("#solo").attr('src', '../resources/images/solo2.png');
+    $("#all").attr('src', '../resources/images/all.png');
     let song = localStorage.getItem("SI");
     let v = localStorage.getItem('VOICE');
     let curr_time = audio_song.currentTime;
