@@ -68,7 +68,7 @@ if(localStorage.getItem('SI') !== null) {
     songIndex = songs.indexOf(localStorage.getItem('SI'))
 }
 else {
-    songIndex = songs.indexOf("Hallelujah")
+    songIndex = songs.indexOf("Cantate Domino")
 }
 // Dodanie aktualnego głosu do local storage
 if(localStorage.getItem('VOICE') !== null) {
