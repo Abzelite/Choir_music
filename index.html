@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Fondamento&family=Monsieur+La+Doulaise&family=Playfair+Display&display=swap" rel="stylesheet">
+    <title>ChoirApp</title>
+    <link rel="icon" href="resources/images/c.png">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.4/plugin/wavesurfer.regions.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.4/plugin/wavesurfer.spectrogram.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"></script>
+    <script src="https://kit.fontawesome.com/233634dc82.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--    <script src="js/require.js"></script>-->
+</head>
+<body>
+<div class="wrapper ">
+    <div class="sidebar">
+        <h2>Search for a song</h2>
+        <form role="search" id="form" >
+            <label for="search"></label><input type="search" id="search" name="search" placeholder="Search...">
+            <button type="submit" id="search_butt">
+                <img src="resources/images/loupe.png" width="66%" alt="loupe">
+            </button>
+        </form>
+        <ul class="sidebar_list">
+        </ul>
+    </div>
+</div>
+<div class="main_content">
+
+    <div class="header">
+        <h1>Music title</h1>
+    </div>
+    <div class = "all_voices">
+        <audio src="" id="audio_voices"></audio>
+        <audio src="" id="audio_voices2"></audio>
+        <audio src="" id="audio_voices3"></audio>
+        <audio src="" id="audio_voices4"></audio>
+        <div class="group_buttons">
+           <!-- <button class="solo_button"><i class="fas fa-circle fa-2xl" > </i><span>Solo</span></button>
+            <button class="all_button"><i class="fas fa-circle fa-2xl" ></i><span>All</span></button>-->
+            <button class="solo_button"><img class="solo" src="resources/images/solo2.png" alt="solo" width="120"> </button>
+            <button class="all_button"><img class="all" src="resources/images/all.png" alt="solo" width="120"> </button>
+        </div>
+    </div>
+    <div class="book" tabindex="0">
+        <img alt="page 1 of song" class="pag1" src="resources/notes/Hallelujah/Hallelujah_alto_1.png">
+        <img alt="page 2 of song" class="pag2" src="resources/notes/Hallelujah/Hallelujah_alto_2.png">
+
+<!--    </div>
+    <div class="nav_box">
+    <div class="book_nav">
+    </div>-->
+    </div>
+    <div class="music-nav">
+
+        <div class="mc" id="mc">
+            <div class="music-info">
+                <h4 id="title">Music</h4>
+                <div class="music-timeline">
+                <h6 class="time_begin">0:00</h6>
+                <h6 class="time_end">00:38</h6>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress" id="progress">
+                            <button class=" dot prog_icon"> <img src="resources/images/prog.png" width="35" alt="progress"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <audio src="notes/Hallelujah/Hallelujah_alto.mp3" id="audio"></audio>
+            <div class="navigation3">
+                <div class="navigation">
+                    <button id="prev" class="action-btn">
+                        <i class="fas fa-backward-step"></i>
+                    </button>
+                    <button id="beg" class="action-btn">
+                        <i class="fa-solid fa-backward"></i>
+                    </button>
+                    <button id="play" class="action-btn action-btn-big">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="song_end" class="action-btn">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                    <button id="next" class="action-btn">
+                        <i class="fas fa-forward-step"></i>
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="vol">
+                <label for="volume"><button id="speaker" class="action-btn">
+                    <i class="fas fa-volume-high"></i>
+                </button></label>
+                <input type="range" id="volume" class="control-volume" min="0" max="100" value="1" step="1" oninput="rangevalue.value=value"/>
+                <label for="rangevalue"></label><input type="number" id="rangevalue" value="100" oninput="range.value=value">
+
+                <label class="pbrate" for="pbrate">playbackrate: </label>
+                <select id="pbrate" class="decorated" onchange="setPlaybackRate(this)">
+                    <option class="dropdown-item s" id="half">0.5</option>
+                    <option class="dropdown-item s" id="seventy_five" >0.75</option>
+                    <option class="dropdown-item s" id="one" selected>1.0</option>
+                    <option class="dropdown-item s" id="one_twenty_five">1.25</option>
+                    <option class="dropdown-item s" id="one_and_half" >1.5</option>
+                    </select>
+            </div>
+            <div class="save_a">
+                <button class="save_audio"><img src="resources/images/sav_audio.png" width="160" alt="save_audio"></button>
+                <button class="save_notes"><img src="resources/images/sav_notes.png" width="160" alt="save_notes"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="music-nav recording">
+        <div class="mc bg2">
+        <p class="record-text">Press circle to start recording</p>
+        <p class="record-text2">Recording</p>
+        <div class="navigation2">
+        </div>
+            <div class="rec_buttons">
+                <button id="start_rec"> <i class="fas fa-circle" ></i></button>
+                <button id="stop_rec"> <i class="fas fa-square" ></i></button>
+            </div>
+            <div id="play_rec"></div>
+            <button class="save_rec"><img src="resources/images/sav_audio.png" width="160"></button>
+        </div>
+    </div>
+    <div class="music-text">
+        <h2 class="song_title">Hallelujah</h2>
+        <pre class="mtext"></pre>
+    </div>
+    <footer><p class="footer-name">Milena Pawlak @ 2022</p></footer>
+</div>
+<nav class="navbar navbar-expand-lg ">
+    <a class="navbar-brand" href="."><span>C</span>hoir App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbarToggler3"
+            aria-controls="myNavbarToggler3" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="myNavbarToggler3">
+        <ul class="navbar-nav ml-auto mr-md-3">
+            <li class="nav-item">
+                <div class="nav_bg">
+                <a class="nav-link" href="pages/vocalTips.html">Vocal tips</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/notes.html">Learning notes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pages/vocalAnalyze.html">Vocal analyze</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script  src="js/music.js"></script>
+</body>
+</html>

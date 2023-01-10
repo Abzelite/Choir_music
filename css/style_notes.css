@@ -1,0 +1,207 @@
+/**::before, *::after {*/
+/*    box-sizing: border-box;*/
+/*}*/
+.bod {
+    background-image: url("../resources/images/church.png");
+    background-repeat: no-repeat;
+    background-size: 120%;
+
+}
+
+.main_body {
+    margin-top: 0;
+    /*min-height: 800px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.piano {
+    /*margin-top: -300px;*/
+    display: flex;
+    background-color: #130c09;
+    /*background-image: url("../resources/images/wood.jpg");*/
+    padding:20px 100px 35px;
+    border-radius: 10px;
+    box-shadow: 1px 5px 5px rgba(0,0,0,0.4);
+    margin-left: 180px;
+
+}
+
+.inf {
+    margin: 30px 20px;
+    font-size: 1.4em;
+    color: rgba(245, 194, 132, 0.9);
+}
+
+.key {
+    height: calc(var(--width)*4);
+    width: var(--width) ;
+    cursor: pointer;
+
+}
+
+.white {
+    --width: 100px;
+    color: rgba(0, 0, 0, 0.55);
+    /*height: 400px;*/
+    box-shadow: 1px 5px 5px rgba(0,0,0,0.6);
+    background-color: white;
+    border: 1px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.white h4 {
+    color: rgb(128, 0, 0);
+    margin-top:310px;
+}
+.white h3 {
+    margin-top: 10px
+}
+
+.black h4 {
+    color: rgb(128, 0, 0);
+
+    margin-top: 160px;
+}
+.black h3 {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 5px;
+}
+
+.white:active, .white:focus {
+    /*background-color: #a8a8a8;*/
+    box-shadow: inset 0 0 20px 0 #1f1d19;
+}
+.black:active, .black:focus {
+    box-shadow: inset 0 0 20px 0 #1f1d19;
+    /*background-color: #424242;*/
+}
+
+.black {
+    box-shadow: 1px 3px 3px rgba(0,0,0,0.4);
+    --width: 60px;
+    /*height: 240px;*/
+    background-color: #151515;
+
+    border: 1px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-left: calc(var(--width)/-2);
+    margin-right: calc(var(--width) /-2);
+    z-index: 2;
+}
+
+.switch_names {
+    margin-left: 50px;
+    /*position: absolute;*/
+    color: #F5C284FF;
+    margin-top: 20px;
+    display: inline-block;
+
+}
+/* The switch - the box around the slider */
+.switch {
+    margin-top: 5px;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #3d2d23;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #3d2d23;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.sidebar {
+    z-index: 4;
+}
+
+.note_pic {
+    transition: 0.2s;
+    /*display: none;*/
+    margin: 50px auto;
+    justify-content: center;
+    text-align: center;
+    height: 300px;
+    width: 600px;
+    background-image: url("../resources/pic_notes/C.png");
+
+}
+
+.comm {
+    margin: 10px auto 20px;
+    padding: 10px 15px;
+    background: #130c09;
+    width: fit-content;
+    justify-content: center;
+
+    outline: 4px solid rgba(89, 68, 43, 0.5);
+    outline-offset: -16px;
+    border-radius: 35px;
+}
+
+#ln::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #F5C284FF;
+    opacity: 50%;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
