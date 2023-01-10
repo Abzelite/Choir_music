@@ -53,8 +53,8 @@ let songIndex;
 let voi;
 
 //Song titles
-const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Alleluja', 'Silent night', 'Love', 'Dragonborn (Skyrim Theme)', 'Choir music', 'Soon ah will be done', 'Marsz weselny']
-// const songs = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
+const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Daemon irrepit callidus', 'Silent night',  'Dragonborn (Skyrim Theme)', 'Psalm 150', 'Soon ah will be done', 'Marsz weselny']
+//const songs = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
 const voices = ['soprano', 'alto', 'tenor', 'bass']
 
 // Keep track of songs
@@ -94,6 +94,7 @@ const gainNode = audioContext.createGain();
 
 // Update song details
 async function loadSong(song, voice) {
+
     localStorage.setItem('SI', `${song}`)
     localStorage.setItem('VOICE', `${voice}`)
     voi = voices.indexOf(voice)
@@ -110,11 +111,14 @@ async function loadSong(song, voice) {
         text.textContent = 'Tekst nie został jeszcze umieszczony'
     let fil = checkFileExist(`notes/${song}/${song+'_'+voice}.mp3`)
     console.log(fil)
+    pauseSong();
+    toBegin()
     if(fil) {
+
         audio_song.src = `notes/${song}/${song + '_' + voice}.mp3`
         audio_sop.src = `notes/${song}/${song + '_' + 'soprano'}.mp3`
         audio_dur = audio_song.duration;
-        pauseSong();
+
     }
     let fil2 = checkFileExist(`resources/notes/${song}/${song + '_' + voice + '_1'}.png`)
     if(fil2) {
@@ -127,6 +131,7 @@ async function loadSong(song, voice) {
         page1.style.display = 'none'
         page2.style.display = 'none'
     }
+
 }
 
 let output = false;
