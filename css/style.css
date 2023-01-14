@@ -169,8 +169,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .wrapper {
     display: flex;
-
-    /*flex-direction: column;*/
     position: relative;
     z-index: 3;
 }
@@ -188,16 +186,11 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .sidebar::-webkit-scrollbar {
     background: transparent;
-    /*display: none;*/
-    /*-ms-overflow-style: none;  !* IE and Edge *!*/
-
 }
-
 .sidebar:hover::-webkit-scrollbar, body::-webkit-scrollbar{
     background-color: rgba(51,44,33,0.9);
     width: 12px;
 }
-
 .sidebar:hover::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb{
     background-color: rgba(245, 194, 132, 0.9);
     border-radius: 10px;
@@ -283,7 +276,6 @@ a {
     width: 1600px;
 }
 .pag1 {
-
     margin-top: 80px;
     width: 38%;
 
@@ -357,10 +349,6 @@ pre {
     top:77px;
     height: 30px;
     width: 30px;
-    /*background: rgb(255,243,220);
-    background: radial-gradient(circle, rgb(211, 170, 139) 0%, rgb(158, 113, 17) 100%);
-    border: 4px solid #dabc95;
-    border-radius: 50%;*/
     display: inline-block;
     left:48%;
     transition: width 0.1s linear;
@@ -369,7 +357,6 @@ pre {
 .navigation3 {
     display: flex;
 }
-
 .navigation, .navigation2{
     display: flex;
     align-items: center;
@@ -388,16 +375,12 @@ pre {
     margin-top: 150px;
 }
 .action-btn {
-
-    /*background-color: black;*/
     border: 0;
     color:  #F5C284FF;
-   /* font-size: 1.2rem;*/
     cursor: pointer;
     padding: 10px;
     margin: 0 20px;
 }
-
 
 .action-btn-big {
     color:  #F5C284FF;
@@ -449,7 +432,6 @@ pre {
 }
 
 .progress {
-
     background-color:  #F5C284;
     box-shadow: inset 0 0 8px #3a2f1e;
     border-radius: 8px;
@@ -468,7 +450,6 @@ pre {
     align-items: center;
     margin: 40px auto;
     border-radius: 50px;
-
 }
 .track {
     display: flex;
@@ -476,32 +457,22 @@ pre {
     margin: 40px auto;
 
 }
-
 .track div {
     flex:1;
-    /*width: 80%;*/
 }
-
 .all_voices {
     position: fixed;
     right: 120px;
     font-size: 2em;
-    top: 50%;
+    top: 45%;
 
 }
+
 .group_buttons button:last-child{
     position: relative;
     display:block;
     margin-top: 70px;
 }
-
-/*
-.group_buttons button i {
-    color:  #F5C284;
-    border-radius: 20px;
-}
-*/
-
 .solo_button img:hover:active {
     transition-delay: 2s;
     content:url('../resources/images/solo2.png');
@@ -511,16 +482,6 @@ pre {
 .all_button img:active {
     content:url('../resources/images/all2.png');
 }
-
-/*.group_buttons button span {
-    font-size: 0.7em;
-    position: absolute;
-    top: 15%;
-    left: 35%;
-    color: #60513a;
-}*/
-
-
 .music-timeline {
     margin-top: 50px;
 }
@@ -563,9 +524,6 @@ input[type="range"]::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
     border-radius: 100%;
-   /* background: rgb(255,243,220);
-    background: radial-gradient(circle, rgb(211, 170, 139) 0%, rgb(158, 113, 17) 100%);
-    border: 3px solid #dabc95;*/
     cursor: pointer;
     transition: background .3s ease-in-out;
 }
@@ -584,55 +542,6 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
-
-/*
-
-.speed {
-    margin-left: 100px;
-    cursor: pointer;
-}
-
-.speed:hover {
-    color: #60513a;
-}
-
-.speed-menu {
-    margin: 10px auto;
-    width: 0;
-    min-width: 90px;
-    color:  #F5C284FF;
-    background: #574731;
- !*   overflow:hidden;*!
-    outline: none;
-}
-
-.s {
-    width: 100px;
-    min-height: 2px;
-    !*margin-left: 10px;*!
-    color:  #F5C284FF;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.s:hover {
-    background: #a2865e;
-}
-s:active {
-    background: #a2865e;
-}
-s:focus {
-    background: #a2865e;
-}
-.speed-menu .s:first-child {
-    border-top: none;
-}
-.speed-menu .s:last-child {
-    border-bottom: none;
-}
-*/
-
 .pbrate {
     margin-left: 60px;
     margin-right: 10px;
@@ -651,23 +560,14 @@ option:checked {
     background: #674535 !important;
     color: white;
 }
-
 .save_a {
     text-align: center;
     margin: auto auto;
-
 }
 .save_a button{
     margin-top: 30px;
     width: 150px;
     margin-bottom: 50px;
-   /* background-image: url("../resources/images/sav_audio.png")*/
-    /*color: #1a1e21;*/
-    /*border-radius: 10px;*/
-    /*outline: 2px solid rgba(89, 68, 43, 0.5);
-    outline-offset: -6px;*/
-    /*font-size: 1.1rem;*/
-    /*margin-left: 20px;*/
 }
 .save_a .save_audio {
     margin-right: 60px;
@@ -689,7 +589,6 @@ option:checked {
 .record-text2 {
     display: none;
 }
-
 .audio2::-webkit-media-controls-panel {
     background-color: #F5C284;
 }
@@ -698,30 +597,15 @@ option:checked {
 }
 .save_rec {
     display: none;
-
-   margin: 10px auto 60px;
+    margin: 10px auto 60px;
     width: 150px;
     border-radius: 10px;
+}
+#currentNote{
+
+    color: #c7ad90;
+    font-size: 2em;
+    position: absolute;
+    top:300px;
 
 }
-/*
-.nav_box {
-    width: 370px;
-    background-color: #0a53be;
-    height: 50px;
-    position: absolute;
-    z-index: 1;
-    top:450px;
-    left:700px;
-    opacity: 60%;
-}
-.book_nav {
-    width: 10px;
-    height: 50px;
-    position: relative;
-    !*position: absolute;*!
-    background-color: red;
-!*    top:450px;
-    left:700px;*!
-    transition: background .3s ease-in-out;
-}*/

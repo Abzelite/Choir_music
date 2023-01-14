@@ -12,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Fondamento&family=Monsieur+La+Doulaise&family=Playfair+Display&display=swap" rel="stylesheet">
     <title>ChoirApp</title>
     <link rel="icon" href="resources/images/c.png">
-    <script src="https://unpkg.com/wavesurfer.js"></script>
+  <!--  <script src="https://unpkg.com/wavesurfer.js"></script>-->
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.4/plugin/wavesurfer.regions.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.4/plugin/wavesurfer.spectrogram.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"></script>
@@ -23,6 +24,8 @@
 <!--    <script src="js/require.js"></script>-->
 </head>
 <body>
+<div class="hide_bar">
+</div>
 <div class="wrapper ">
     <div class="sidebar">
         <h2>Search for a song</h2>
@@ -42,25 +45,16 @@
         <h1>Music title</h1>
     </div>
     <div class = "all_voices">
-        <audio src="" id="audio_voices"></audio>
-        <audio src="" id="audio_voices2"></audio>
-        <audio src="" id="audio_voices3"></audio>
-        <audio src="" id="audio_voices4"></audio>
         <div class="group_buttons">
-           <!-- <button class="solo_button"><i class="fas fa-circle fa-2xl" > </i><span>Solo</span></button>
-            <button class="all_button"><i class="fas fa-circle fa-2xl" ></i><span>All</span></button>-->
             <button class="solo_button"><img id="solo" src="resources/images/solo2.png" alt="solo button" width="120"> </button>
             <button class="all_button"><img id="all" src="resources/images/all.png" alt="all button" width="120"> </button>
+
         </div>
+        <button id='currentNote' onclick="setup()"></button>
     </div>
     <div class="book" tabindex="0">
         <img alt="page 1 of song" class="pag1" src="resources/notes/Hallelujah/Hallelujah_alto_1.png">
         <img alt="page 2 of song" class="pag2" src="resources/notes/Hallelujah/Hallelujah_alto_2.png">
-
-<!--    </div>
-    <div class="nav_box">
-    <div class="book_nav">
-    </div>-->
     </div>
     <div class="music-nav">
 

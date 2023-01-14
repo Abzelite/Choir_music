@@ -1,4 +1,3 @@
-const AudioContext = window.AudioContext || window.webkitAudioContext;
 const musicContainer = document.querySelector('.mc')
 const playBtn = document.querySelector('#play')
 const prevBtn = document.querySelector('#prev')
@@ -57,6 +56,8 @@ const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes'
 //const songs = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
 const voices = ['soprano', 'alto', 'tenor', 'bass']
 
+
+console.log(ml5.version)
 // Keep track of songs
 songs.sort();
 // Initially load song info DOM
@@ -77,21 +78,11 @@ if(localStorage.getItem('VOICE') !== null) {
 else {
     voi = voices.indexOf("alto")
 }
-loadSong(songs[songIndex],voices[voi])
+loadSong(songs[songIndex], voices[voi]).then()
 
 audio_song.onloadedmetadata = function() {
     audio_dur = audio_song.duration
 };
-
-const audioContext = new AudioContext({
-    latencyHint: "interactive",
-    sampleRate: 44100,
-});
-
-const track = audioContext.createMediaElementSource(audio_song);
-track.connect(audioContext.destination);
-const gainNode = audioContext.createGain();
-
 // Update song details
 async function loadSong(song, voice) {
 
@@ -165,43 +156,12 @@ function addSong(title){
         </div>`
     sidebar_list.appendChild(lista)
 }
-
-/*const recordAudio = () =>
-    new Promise(async resolve => {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        const mediaRecorder = new MediaRecorder(stream);
-        const audioChunks = [];
-
-        mediaRecorder.addEventListener("dataavailable", event => {
-            audioChunks.push(event.data);
-        });
-
-        const start = () => mediaRecorder.start();
-
-        const stop = () =>
-            new Promise(resolve => {
-                mediaRecorder.addEventListener("stop", () => {
-                    const audioBlob = new Blob(audioChunks, { type: "audio/mpeg" });
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    const audio = new Audio(audioUrl);
-                    const play = () => audio.play();
-                    resolve({ audioBlob, audioUrl, play });
-                });
-
-                mediaRecorder.stop();
-            });
-
-        resolve({ start, stop });
-    });
-
-const sleep = time => new Promise(resolve => setTimeout(resolve, time));*/
-
 function playSong() {
     musicContainer.classList.add('play')
     playBtn.querySelector('i.fas').classList.remove('fa-play')
     playBtn.querySelector('i.fas').classList.add('fa-pause')
     if (audioContext.state === "suspended") {
-        audioContext.resume();
+        audioContext.resume().then();
     }
     audio_song.play();
 }
@@ -210,7 +170,7 @@ function pauseSong() {
     playBtn.querySelector('i.fas').classList.remove('fa-pause')
     playBtn.querySelector('i.fas').classList.add('fa-play')
     if (audioContext.state === "suspended") {
-        audioContext.resume();
+        audioContext.resume().then();
     }
     audio_song.pause()
 }
@@ -410,7 +370,7 @@ function playAllVoices() {
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + 'all'}.mp3`
 
-    if (play.querySelector('i.fas').classList.contains('fa-pause')) {
+    if (playBtn.querySelector('i.fas').classList.contains('fa-pause')) {
         audio_song.currentTime = curr_time;
         audio_song.play()
         console.log(audio_song.onended)
@@ -425,7 +385,7 @@ function playOneVoice() {
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + v}.mp3`
 
-    if (play.querySelector('i.fas').classList.contains('fa-pause')) {
+    if (playBtn.querySelector('i.fas').classList.contains('fa-pause')) {
         audio_song.currentTime = curr_time;
         audio_song.play()
         console.log(audio_song.currentTime)
@@ -522,9 +482,6 @@ start_rec.onclick = () => {
 
     }
 }
-
-
-
 stop_rec.onclick = () => {
     if(mediaRecorder.state !== 'inactive') {
         audio_song.pause()
@@ -535,6 +492,66 @@ stop_rec.onclick = () => {
     console.log(mediaRecorder.state)
 }
 
+//https://github.com/ml5js/ml5-library/blob/main/examples/javascript/PitchDetection/PitchDetection/model/group3-shard1of1
+// Pitch variables
+let crepe;
+const voiceLow = 100;
+const voiceHigh = 500;
+let audioStream;
+let stream;
+
+const width = 410;
+const height = 320;
+const scale = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+// Text variables
+let currentNote = '';
+let textCoordinates;
+// taken from p5.Sound
+function freqToMidi(f) {
+    const mathlog2 = Math.log(f / 440) / Math.log(2);
+    return Math.round(12 * mathlog2) + 69;
+}
+function map(n, start1, stop1, start2, stop2) {
+    return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+}
+async function setup() {
+    textCoordinates = [width / 2, 30];
+    audioContext = new AudioContext();
+    stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: false
+    });
+
+    startPitch(stream, audioContext);
+   // requestAnimationFrame(draw)
+}
+setup().then()
+
+
+function startPitch(stream, audioContext) {
+    pitch = ml5.pitchDetection('./model/', audioContext, stream, modelLoaded);
+}
+
+function modelLoaded() {
+    //document.querySelector('#status').textContent = 'Model Loaded';
+    getPitch();
+}
+
+function getPitch() {
+    //audioContext.resume().then()
+    pitch.getPitch(function (err, frequency) {
+        if (frequency) {
+            const midiNum = freqToMidi(frequency);
+            currentNote = scale[midiNum % 12];
+            document.querySelector('#currentNote').innerText = currentNote;
+        }
+        getPitch();
+    })
+}
+function dist(x1, y1, x2, y2) {
+    return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
+}
 // LISTENERS
 allbutton.addEventListener('click', playAllVoices)
 solobutton.addEventListener('click', playOneVoice)
