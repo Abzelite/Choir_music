@@ -473,6 +473,16 @@ pre {
     display:block;
     margin-top: 70px;
 }
+#curr_no{
+    background-image: url("resources/images/all.png");
+    color: #c7ad90;
+    font-size: 2em;
+    position: absolute;
+    top:340px;
+    right:0px;
+}
+
+
 .solo_button img:hover:active {
     transition-delay: 2s;
     content:url('../resources/images/solo2.png');
@@ -601,11 +611,14 @@ option:checked {
     width: 150px;
     border-radius: 10px;
 }
-#currentNote{
 
-    color: #c7ad90;
-    font-size: 2em;
+#currentNote {
+    z-index: 10;
     position: absolute;
-    top:300px;
+    font-size: 1.2em;
+    text-align: center;
+    right:-35px;
+    top:375px
+
 
 }

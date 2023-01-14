@@ -56,8 +56,6 @@ const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes'
 //const songs = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
 const voices = ['soprano', 'alto', 'tenor', 'bass']
 
-
-console.log(ml5.version)
 // Keep track of songs
 songs.sort();
 // Initially load song info DOM
@@ -107,7 +105,7 @@ async function loadSong(song, voice) {
     if(fil) {
 
         audio_song.src = `notes/${song}/${song + '_' + voice}.mp3`
-        audio_sop.src = `notes/${song}/${song + '_' + 'soprano'}.mp3`
+        //audio_sop.src = `notes/${song}/${song + '_' + 'soprano'}.mp3`
         audio_dur = audio_song.duration;
 
     }
@@ -544,7 +542,7 @@ function getPitch() {
         if (frequency) {
             const midiNum = freqToMidi(frequency);
             currentNote = scale[midiNum % 12];
-            document.querySelector('#currentNote').innerText = currentNote;
+            document.querySelector('#currentNote').textContent = currentNote;
         }
         getPitch();
     })
