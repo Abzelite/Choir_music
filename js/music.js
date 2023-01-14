@@ -148,7 +148,6 @@ function checkFileExist(url) {
             output = false;
         }
         return output
-
 }
 function addSong(title){
     let lista = document.createElement('li')
@@ -167,7 +166,7 @@ function addSong(title){
     sidebar_list.appendChild(lista)
 }
 
-const recordAudio = () =>
+/*const recordAudio = () =>
     new Promise(async resolve => {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         const mediaRecorder = new MediaRecorder(stream);
@@ -195,8 +194,7 @@ const recordAudio = () =>
         resolve({ start, stop });
     });
 
-const sleep = time => new Promise(resolve => setTimeout(resolve, time));
-
+const sleep = time => new Promise(resolve => setTimeout(resolve, time));*/
 
 function playSong() {
     musicContainer.classList.add('play')
@@ -230,7 +228,7 @@ function prevSong() {
     if(songIndex < 0) {
         songIndex = songs.length - 1
     }
-    loadSong(songs[songIndex], voices[voi])
+    loadSong(songs[songIndex], voices[voi]).then()
 }
 
 function nextSong() {
@@ -240,7 +238,7 @@ function nextSong() {
         songIndex = 0
     }
     console.log(voices[voi])
-    loadSong(songs[songIndex], voices[voi])
+    loadSong(songs[songIndex], voices[voi]).then()
 }
 function formatSecondsAsTime(secs, format) {
     let hr  = Math.floor(secs / 3600);
@@ -406,9 +404,8 @@ function setPlaybackRate(el) {
 }
 
 function playAllVoices() {
-
-    $("#solo").attr('src', '../resources/images/solo.png');
-    $("#all").attr('src', '../resources/images/all2.png');
+    $("#solo").attr('src', './../resources/images/solo.png');
+    $("#all").attr('src', './../resources/images/all2.png');
     let song = localStorage.getItem("SI");
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + 'all'}.mp3`
@@ -421,8 +418,8 @@ function playAllVoices() {
 }
 
 function playOneVoice() {
-    $("#solo").attr('src', '../resources/images/solo2.png');
-    $("#all").attr('src', '../resources/images/all.png');
+    $("#solo").attr('src', './../resources/images/solo2.png');
+    $("#all").attr('src', './../resources/images/all.png');
     let song = localStorage.getItem("SI");
     let v = localStorage.getItem('VOICE');
     let curr_time = audio_song.currentTime;
