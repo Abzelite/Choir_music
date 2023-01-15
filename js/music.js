@@ -356,8 +356,8 @@ function setPlaybackRate(el) {
 }
 
 function playAllVoices() {
-    $("#solo").attr('src', './../resources/images/solo.png');
-    $("#all").attr('src', './../resources/images/all2.png');
+    $("#solo").attr('src', 'https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/solo.png');
+    $("#all").attr('src', 'https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/all2.png');
     let song = localStorage.getItem("SI");
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + 'all'}.mp3`
@@ -370,8 +370,10 @@ function playAllVoices() {
 }
 
 function playOneVoice() {
-    $("#solo").attr('src', './../resources/images/solo2.png');
-    $("#all").attr('src', './../resources/images/all.png');
+    //$("#solo").attr('src', './../resources/images/solo2.png');
+    $("#solo").attr('src', 'https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/solo2.png');
+    //$("#all").attr('src', './../resources/images/all.png');
+    $("#all").attr('src', 'https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/all.png');
     let song = localStorage.getItem("SI");
     let v = localStorage.getItem('VOICE');
     let curr_time = audio_song.currentTime;
@@ -497,7 +499,6 @@ function freqToMidi(f) {
     return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
 }*/
 async function setup() {
-    //textCoordinates = [width / 2, 30];
     audioContext = new AudioContext();
     stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
