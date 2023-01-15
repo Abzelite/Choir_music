@@ -4,7 +4,6 @@ const prevBtn = document.querySelector('#prev')
 const nextBtn = document.querySelector('#next')
 const begin = document.querySelector('#beg')
 const audio_song = document.querySelector('#audio')
-const audio_sop = document.querySelector('#audio_voices')
 const progress = document.querySelector('.progress')
 const prog_icon = document.querySelector('.prog_icon')
 const progressContainer = document.querySelector('.progress-container')
@@ -35,8 +34,6 @@ let begin_time = document.querySelector('.time_begin')
 let ending_time = document.querySelector('.time_end')
 let speaker = document.querySelector('#speaker')
 let c_volume = document.querySelector('.control-volume')
-let rate = document.querySelector('.s')
-const rangeInputs = document.querySelector('input[type="range"]')
 const numberInput = document.querySelector('input[type="number"]')
 
 const start_rec = document.querySelector('#start_rec')
@@ -50,6 +47,7 @@ let rec_tex = document.querySelector('.record-text')
 let audio_dur = null;
 let songIndex;
 let voi;
+let isPlaying = false
 
 //Song titles
 const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Daemon irrepit callidus', 'Silent night',  'Dragonborn (Skyrim Theme)', 'Psalm 150', 'Soon ah will be done', 'Marsz weselny']
@@ -155,21 +153,18 @@ function addSong(title){
     sidebar_list.appendChild(lista)
 }
 function playSong() {
+    isPlaying = true
     musicContainer.classList.add('play')
     playBtn.querySelector('i.fas').classList.remove('fa-play')
     playBtn.querySelector('i.fas').classList.add('fa-pause')
-    if (audioContext.state === "suspended") {
-        audioContext.resume().then();
-    }
+
     audio_song.play();
 }
 function pauseSong() {
+    isPlaying = false
     musicContainer.classList.remove('play')
     playBtn.querySelector('i.fas').classList.remove('fa-pause')
     playBtn.querySelector('i.fas').classList.add('fa-play')
-    if (audioContext.state === "suspended") {
-        audioContext.resume().then();
-    }
     audio_song.pause()
 }
 
@@ -350,7 +345,6 @@ speaker.addEventListener('click', () => {
         speaker.querySelector('i.fas').classList.remove('fa-volume-off')
         speaker.querySelector('i.fas').classList.add('fa-volume-high')
         volumeControl.style.backgroundSize = `${old_val}% 100%`
-
     }
 })
 
@@ -477,7 +471,6 @@ start_rec.onclick = () => {
         console.log(begin_time.innerText)
         rec_text.style.display = 'block'
         rec_tex.textContent = 'Press square to stop recording'
-
     }
 }
 stop_rec.onclick = () => {
@@ -491,58 +484,50 @@ stop_rec.onclick = () => {
 }
 
 //https://github.com/ml5js/ml5-library/blob/main/examples/javascript/PitchDetection/PitchDetection/model/group3-shard1of1
-// Pitch variables
-let crepe;
-const voiceLow = 100;
-const voiceHigh = 500;
-let audioStream;
+// TONER
 let stream;
-
-const width = 410;
-const height = 320;
 const scale = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-
-// Text variables
 let currentNote = '';
-let textCoordinates;
 // taken from p5.Sound
 function freqToMidi(f) {
     const mathlog2 = Math.log(f / 440) / Math.log(2);
     return Math.round(12 * mathlog2) + 69;
 }
-function map(n, start1, stop1, start2, stop2) {
+/*function map(n, start1, stop1, start2, stop2) {
     return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
-}
+}*/
 async function setup() {
-    textCoordinates = [width / 2, 30];
+    //textCoordinates = [width / 2, 30];
     audioContext = new AudioContext();
     stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: false
     });
-
     startPitch(stream, audioContext);
-   // requestAnimationFrame(draw)
 }
 setup().then()
-
 
 function startPitch(stream, audioContext) {
     pitch = ml5.pitchDetection('./model/', audioContext, stream, modelLoaded);
 }
 
 function modelLoaded() {
-    //document.querySelector('#status').textContent = 'Model Loaded';
     getPitch();
 }
 
 function getPitch() {
-    //audioContext.resume().then()
+    audioContext.resume().then()
     pitch.getPitch(function (err, frequency) {
         if (frequency) {
             const midiNum = freqToMidi(frequency);
             currentNote = scale[midiNum % 12];
             document.querySelector('#currentNote').textContent = currentNote;
+            if( document.querySelector('#currentNote').textContent.length ===2) {
+                document.querySelector('#currentNote').style.right ='-35px'
+            }
+            else {
+                document.querySelector('#currentNote').style.right ='-28px'
+            }
         }
         getPitch();
     })
@@ -550,6 +535,27 @@ function getPitch() {
 function dist(x1, y1, x2, y2) {
     return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
 }
+// STEROWANIE KLAWIATURĄ
+window.addEventListener('keyup', e => {
+    if(e.keyCode === 32) {
+        if(isPlaying)
+        { pauseSong()
+        }
+        else {
+            playSong()
+        }
+    }
+    if(e.keyCode === 37 && audio_song.currentTime > 0) {
+        audio_song.currentTime -=5;
+    }
+    if(e.keyCode === 39) {
+        audio_song.currentTime +=5;
+    }
+})
+window.onkeydown = function(e) {
+    return e.keyCode !== 32;
+};
+
 // LISTENERS
 allbutton.addEventListener('click', playAllVoices)
 solobutton.addEventListener('click', playOneVoice)
