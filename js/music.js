@@ -152,13 +152,16 @@ function addSong(title){
         </div>`
     sidebar_list.appendChild(lista)
 }
+
+
 function playSong() {
     isPlaying = true
     musicContainer.classList.add('play')
     playBtn.querySelector('i.fas').classList.remove('fa-play')
     playBtn.querySelector('i.fas').classList.add('fa-pause')
-
     audio_song.play();
+
+
 }
 function pauseSong() {
     isPlaying = false
@@ -233,6 +236,18 @@ function setProgress(e) {
     audio_song.currentTime = (clickX / width) * duration
     begin_time.value = audio_song.currentTime;
 }
+function hideSidebar() {
+    let sid = document.querySelector('.sidebar')
+    console.log(sid.style.transform)
+    if(sid.style.transform === "translate(0px, -960px)" || sid.style.transform === 'translate(0,0)')
+        sid.style.transform = "translate(0,0px)"
+    else {
+        sid.style.transition = '1.5s'
+        sid.style.transform = "translate(0,-960px)"
+        console.log(sid.style.transform)
+    }
+}
+
 // Wyszukiwanie lupka
 function searchEngine2() {
     const text = searchers.value.toLowerCase();
@@ -356,8 +371,8 @@ function setPlaybackRate(el) {
 }
 
 function playAllVoices() {
-    document.querySelector('#solo').src  ='https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/solo.png'
-    document.querySelector('#all').src = 'https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/all2.png'
+    $("#solo").attr('src', './../resources/images/solo.png');
+    $("#all").attr('src', './../resources/images/all2.png');
     let song = localStorage.getItem("SI");
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + 'all'}.mp3`
@@ -370,11 +385,8 @@ function playAllVoices() {
 }
 
 function playOneVoice() {
-    //$("#solo").attr('src', './../resources/images/solo2.png');
-
-    //$("#all").attr('src', './../resources/images/all.png');
-    document.querySelector('#solo').src  ='https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/solo2.png'
-    document.querySelector('#all').src = 'https://github.com/00mila00/Choir_music/blob/1619ee778f8c59921e848e49b9ee0f32c9e582bf/resources/images/all.png'
+    $("#solo").attr('src', './../resources/images/solo2.png');
+    $("#all").attr('src', './../resources/images/all.png');
     let song = localStorage.getItem("SI");
     let v = localStorage.getItem('VOICE');
     let curr_time = audio_song.currentTime;
@@ -425,8 +437,10 @@ function saveAudio() {
 let chunk = []
 let mediaRecorder
 let blob,audio_url,audio2
+let context = new AudioContext()
 navigator.mediaDevices.getUserMedia({audio:true})
     .then(stream => {
+        initAudio(stream)
         mediaRecorder = new MediaRecorder(stream)
         mediaRecorder.ondataavailable = (e) => {
             chunk.push(e.data)
@@ -451,6 +465,34 @@ navigator.mediaDevices.getUserMedia({audio:true})
             play_rec.appendChild(audio2)
         }
     })
+
+//https://stackoverflow.com/questions/16949768/how-can-i-reduce-the-noise-of-a-microphone-input-with-the-web-audio-api
+let compresor,filter
+function initAudio(stream) {
+    compresor = context.createDynamicsCompressor()
+    compresor.threshold.value = -50;
+    compresor.knee.value = 40;
+    compresor.ratio.value = 12;
+    compresor.reduction= -20;
+    compresor.attack.value = 0;
+    compresor.release.value = 0.25;
+
+    console.log(compresor.reduction)
+
+    filter = context.createBiquadFilter()
+    filter.Q.value = 8.30;
+    filter.frequency.value;
+    filter.gain.value = 3.0;
+    filter.type = 'bandpass';
+    filter.connect(compresor);
+
+    compresor.connect(context.destination)
+    filter.connect(context.destination)
+
+    mediaStreamSource = context.createMediaStreamSource(stream)
+    mediaStreamSource.connect(filter)
+
+}
 
 function saveRec() {
     console.log(audio2.src)
@@ -509,6 +551,7 @@ async function setup() {
 }
 setup().then()
 
+
 function startPitch(stream, audioContext) {
     pitch = ml5.pitchDetection('./model/', audioContext, stream, modelLoaded);
 }
@@ -534,6 +577,9 @@ function getPitch() {
         getPitch();
     })
 }
+
+
+
 function dist(x1, y1, x2, y2) {
     return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
 }
@@ -557,6 +603,8 @@ window.addEventListener('keyup', e => {
 window.onkeydown = function(e) {
     return e.keyCode !== 32;
 };
+
+
 
 // LISTENERS
 allbutton.addEventListener('click', playAllVoices)
