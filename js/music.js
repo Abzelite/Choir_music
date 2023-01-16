@@ -239,12 +239,15 @@ function setProgress(e) {
 function hideSidebar() {
     let sid = document.querySelector('.sidebar')
     console.log(sid.style.transform)
-    if(sid.style.transform === "translate(0px, -960px)" || sid.style.transform === 'translate(0,0)')
+    if(sid.style.transform === "translate(0px, -960px)" || sid.style.transform === 'translate(0,0)') {
+        document.querySelector('.hide_bar').innerText = 'Hide searcher';
         sid.style.transform = "translate(0,0px)"
+    }
     else {
         sid.style.transition = '1.5s'
         sid.style.transform = "translate(0,-960px)"
         console.log(sid.style.transform)
+        document.querySelector('.hide_bar').innerText = 'Show searcher'
     }
 }
 
@@ -567,12 +570,21 @@ function getPitch() {
             const midiNum = freqToMidi(frequency);
             currentNote = scale[midiNum % 12];
             document.querySelector('#currentNote').textContent = currentNote;
-            if( document.querySelector('#currentNote').textContent.length ===2) {
-                document.querySelector('#currentNote').style.right ='-35px'
+            if (window.screen.width >600) {
+                if (document.querySelector('#currentNote').textContent.length === 2) {
+                    document.querySelector('#currentNote').style.right = '-35px'
+                } else {
+                    document.querySelector('#currentNote').style.right = '-28px'
+                }
             }
             else {
-                document.querySelector('#currentNote').style.right ='-28px'
+                if (document.querySelector('#currentNote').textContent.length === 2) {
+                    document.querySelector('#currentNote').style.right = '15px'
+                } else {
+                    document.querySelector('#currentNote').style.right = '10px'
+                }
             }
+
         }
         getPitch();
     })

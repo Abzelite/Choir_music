@@ -299,7 +299,7 @@ a {
     background-color: rgba(236, 205, 168, 0.5);
     margin: 10px auto 50px;
     font-size: 1.4em;
-    width: 50%;
+    width: 500px;
     padding: 50px 100px;
     border-radius: 50px;
     text-align: center;
@@ -477,7 +477,6 @@ pre {
     margin-top: 70px;
 }
 #curr_no{
-   
     color: #c7ad90;
     font-size: 2em;
     position: absolute;
@@ -638,13 +637,91 @@ option:checked {
     border-bottom-right-radius: 30px;
 }
 
+.solo_button, .all_voices, #curr_no, #currentNote {
+    z-index: 30;
+}
+
 @media only screen and (max-width: 600px) {
-    .sidebar {
-        width: 100%;
+    .wrapper .sidebar{
+        width: 600px;
+        z-index: 50;
+    }
+    .sidebar, #form{
+        width: 600px;
+        z-index: 50;
     }
 
     .hide_bar {
         width: 100%;
         display: block;
+    }
+
+    .solo_button img, .all_button img, #curr_no img {
+        width: 80px;
+
+    }
+    .solo_button, .all_voices, #curr_no, #currentNote {
+        z-index: 20;
+    }
+    #curr_no {
+        right: 0;
+        bottom: 20px;
+
+    }
+    #currentNote {
+        right: 0;
+        font-size: 1em;
+        bottom: 30px;
+    }
+    .solo_button, .all_voices {
+        right: 50px;
+    }
+    .book {
+        height: 340px;
+        width: 500px;
+    }
+    .book:focus {
+        transition: 0.3s;
+        margin-left: -100px;
+        height: 510px;
+        width: 800px;
+
+    }
+    .pag1,.pag2 {
+        margin-top: 40px;
+    }
+    .pag2 {
+        margin-left: 30px;
+    }
+    .mc {
+        width: 500px;
+    }
+    .group_buttons {
+        z-index: 30;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+        width: 20px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        width: 20px;
+    }
+    input[type=number] {
+        width: 30px;
+    }
+    .vol {
+        margin-left: -30px;
+
+    }
+    .pbrate {
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+    .main_content{
+        margin-left: 0;
+    }
+    #search_butt {
+        margin-left: 150px;
     }
 }
