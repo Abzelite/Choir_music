@@ -457,9 +457,11 @@ navigator.mediaDevices.getUserMedia({audio:true})
         mediaRecorder = new MediaRecorder(stream)
         mediaRecorder.ondataavailable = (e) => {
             chunk.push(e.data)
+            initAudio(stream)
         }
         mediaRecorder.onstop = () => {
             const blob = new Blob(chunk, {'type': 'audio/ogg; codecs=opus'})
+            stopRecord(stream)
             audio_url = window.URL.createObjectURL(blob)
             audio2 = new Audio(audio_url)
             audio2.setAttribute("controls",'1')
@@ -467,7 +469,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
             audio2.style.margin = '20px'
             audio2.onplay = () => {
                 toBegin()
-                initAudio(stream)
+
                 audio_song.play()
             }
             audio2.onended = () => {
@@ -481,7 +483,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
     })
 
 //https://stackoverflow.com/questions/16949768/how-can-i-reduce-the-noise-of-a-microphone-input-with-the-web-audio-api
-let compresor,filter
+let compresor,filter, mediaStreamSource
 function initAudio(stream) {
     compresor = context.createDynamicsCompressor()
     compresor.threshold.value = -50;
@@ -505,6 +507,14 @@ function initAudio(stream) {
     mediaStreamSource.connect(filter)
 
 }
+function stopRecord(stream) {
+
+    stream.getTracks().forEach(track => track.stop());
+    mediaStreamSource.disconnect
+    filter.disconnect
+    compresor.disconnect
+}
+
 
 function saveRec() {
     console.log(audio2.src)
