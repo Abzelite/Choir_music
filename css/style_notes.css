@@ -205,3 +205,12 @@ input:checked + .slider:before {
     margin: auto;
     transition: 0.5s;
 }
+
+@media only screen and (max-width: 600px) {
+.sidebar {
+    display: none;
+}
+.main_body {
+    margin-left: 500px;
+}
+}

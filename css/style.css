@@ -644,7 +644,7 @@ option:checked {
 @media only screen and (max-width: 600px) {
     .wrapper .sidebar{
         width: 600px;
-        z-index: 50;
+        z-index: 100;
     }
     .sidebar, #form{
         width: 600px;
@@ -662,6 +662,8 @@ option:checked {
     }
     .solo_button, .all_voices, #curr_no, #currentNote {
         z-index: 20;
+        visibility: hidden;
+        transition: 1.0s;
     }
     #curr_no {
         right: 0;
@@ -711,7 +713,6 @@ option:checked {
     }
     .vol {
         margin-left: -30px;
-
     }
     .pbrate {
         margin-left: 10px;

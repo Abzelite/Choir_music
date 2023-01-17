@@ -221,3 +221,15 @@ function addSong(title){
 
 
 
+function hideSidebar() {
+    let sid = document.querySelector('.sidebar')
+    if(sid.style.transform === "translate(0px, -960px)" || sid.style.transform === 'translate(0,0)') {
+        document.querySelector('.hide_bar').innerText = 'Hide searcher';
+        sid.style.transform = "translate(0,0px)"
+    }
+    else {
+        sid.style.transition = '1.5s'
+        sid.style.transform = "translate(0,-960px)"
+        document.querySelector('.hide_bar').innerText = 'Show searcher'
+    }
+}

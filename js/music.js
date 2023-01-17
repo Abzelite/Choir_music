@@ -241,13 +241,23 @@ function hideSidebar() {
     console.log(sid.style.transform)
     if(sid.style.transform === "translate(0px, -960px)" || sid.style.transform === 'translate(0,0)') {
         document.querySelector('.hide_bar').innerText = 'Hide searcher';
+        document.querySelector('.all_button').style.visibility = 'hidden'
+        document.querySelector('.solo_button').style.visibility = 'hidden'
+        document.querySelector('#curr_no').style.visibility = 'hidden'
+        document.querySelector('#currentNote').style.visibility = 'hidden'
         sid.style.transform = "translate(0,0px)"
     }
     else {
         sid.style.transition = '1.5s'
         sid.style.transform = "translate(0,-960px)"
-        console.log(sid.style.transform)
+
         document.querySelector('.hide_bar').innerText = 'Show searcher'
+        document.querySelector('.all_button').style.visibility = 'visible'
+        document.querySelector('.solo_button').style.visibility = 'visible'
+        document.querySelector('#curr_no').style.visibility = 'visible'
+        document.querySelector('#currentNote').style.visibility = 'visible'
+        console.log(document.querySelector('#currentNote').style.display)
+
     }
 }
 
@@ -443,7 +453,7 @@ let blob,audio_url,audio2
 let context = new AudioContext()
 navigator.mediaDevices.getUserMedia({audio:true})
     .then(stream => {
-        initAudio(stream)
+
         mediaRecorder = new MediaRecorder(stream)
         mediaRecorder.ondataavailable = (e) => {
             chunk.push(e.data)
@@ -457,6 +467,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
             audio2.style.margin = '20px'
             audio2.onplay = () => {
                 toBegin()
+                initAudio(stream)
                 audio_song.play()
             }
             audio2.onended = () => {
@@ -479,8 +490,6 @@ function initAudio(stream) {
     compresor.reduction= -20;
     compresor.attack.value = 0;
     compresor.release.value = 0.25;
-
-    console.log(compresor.reduction)
 
     filter = context.createBiquadFilter()
     filter.Q.value = 8.30;
@@ -579,9 +588,9 @@ function getPitch() {
             }
             else {
                 if (document.querySelector('#currentNote').textContent.length === 2) {
-                    document.querySelector('#currentNote').style.right = '15px'
-                } else {
                     document.querySelector('#currentNote').style.right = '10px'
+                } else {
+                    document.querySelector('#currentNote').style.right = '7px'
                 }
             }
 
