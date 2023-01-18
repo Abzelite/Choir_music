@@ -32,6 +32,7 @@ const savenotes = document.querySelector('.save_notes')
 
 let begin_time = document.querySelector('.time_begin')
 let ending_time = document.querySelector('.time_end')
+let ending_song = document.querySelector('#song_end')
 let speaker = document.querySelector('#speaker')
 let c_volume = document.querySelector('.control-volume')
 const numberInput = document.querySelector('input[type="number"]')
@@ -231,6 +232,7 @@ function updateProgress(e) {
     prog_icon.style.left = `${progressPercent - 1.5}%`
     begin_time.innerText =   formatSecondsAsTime(currentTime);
     rec_text.innerText = `Recording...  ${begin_time.innerText}`
+    audio_dur = duration
     if (isNaN(duration)){
         begin_time.innerHTML = '00:00';
         ending_time.innerHTML = '00:00';
@@ -295,6 +297,15 @@ playBtn.addEventListener('click', () =>{
         playSong()
     }
 })
+
+function goToEnd() {
+    if(audio_song.currentTime + 10 < audio_dur) {
+        audio_song.currentTime += 10;
+    }
+    else {
+        audio_song.currentTime = audio_dur
+    }
+}
 
 // Wyszukiwanie automatyczne
 const searchEngine = e => {
@@ -406,7 +417,7 @@ function playAllVoices() {
     if (playBtn.querySelector('i.fas').classList.contains('fa-pause')) {
         audio_song.currentTime = curr_time;
         audio_song.play()
-        console.log(audio_song.onended)
+
     }
 }
 
@@ -658,6 +669,7 @@ searcher_butt.addEventListener('click', searchEngine2)
 prevBtn.addEventListener('click', prevSong)
 nextBtn.addEventListener('click', nextSong)
 begin.addEventListener('click', toBegin)
+ending_song.addEventListener('click', goToEnd)
 audio_song.addEventListener('timeupdate', updateProgress)
 progressContainer.addEventListener('click', setProgress)
 savenotes.addEventListener('click', saveNotes)
