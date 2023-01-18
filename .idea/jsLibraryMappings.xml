@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{233634dc82, all, bootstrap, howler, jquery-3.3.1.slim, ml5, p5.js, popper.js, wavesurfer.js}" />
+    <file url="PROJECT" libraries="{233634dc82, all, bootstrap, font-awesome, howler, jquery-3.3.1.slim, ml5, p5.js, popper.js, wavesurfer.js}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>
