@@ -51,15 +51,26 @@ let isPlaying = false
 
 //Song titles
 const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Daemon irrepit callidus', 'Silent night',  'Dragonborn (Skyrim Theme)', 'Psalm 150', 'Soon ah will be done', 'Marsz weselny']
-//const songs = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
+const songs2 = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
 const voices = ['soprano', 'alto', 'tenor', 'bass']
 
 // Keep track of songs
 songs.sort();
 // Initially load song info DOM
+
+
 for(let i=0; i<songs.length; i++) {
     addSong(songs[i])
 }
+let allList = document.querySelectorAll(".dd")
+for(let i=0; i<songs.length; i++) {
+    for(let j=0; j<songs2.length; j++) {
+        if (allList[i].textContent === songs2[j]) {
+            allList[i].style.color =  '#F5C284FF'
+        }
+    }
+}
+
 // Dodanie aktualnego utworu do local storage
 if(localStorage.getItem('SI') !== null) {
     songIndex = songs.indexOf(localStorage.getItem('SI'))
@@ -74,6 +85,7 @@ if(localStorage.getItem('VOICE') !== null) {
 else {
     voi = voices.indexOf("alto")
 }
+
 loadSong(songs[songIndex], voices[voi]).then()
 
 audio_song.onloadedmetadata = function() {
@@ -103,7 +115,6 @@ async function loadSong(song, voice) {
     if(fil) {
 
         audio_song.src = `notes/${song}/${song + '_' + voice}.mp3`
-        //audio_sop.src = `notes/${song}/${song + '_' + 'soprano'}.mp3`
         audio_dur = audio_song.duration;
 
     }
@@ -117,6 +128,7 @@ async function loadSong(song, voice) {
     else {
         page1.style.display = 'none'
         page2.style.display = 'none'
+
     }
 
 }
@@ -143,7 +155,7 @@ function addSong(title){
     lista.classList.add("lista_muz")
     lista.style.display = 'block'
     lista.id = title
-    lista.innerHTML = ` <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#">${title}<b class="caret"></b></a>
+    lista.innerHTML = ` <a class="nav-link dropdown-toggle dd"  data-toggle="dropdown" href="#">${title}<b class="caret"></b></a>
         <div class="dropdown-menu voices-menu">
             <a href="#" class="dropdown-item" onclick="loadSong('${title}', 'soprano')">soprano</a>
             <a href="#" class="dropdown-item" onclick="loadSong('${title}', 'alto')">alto</a>
@@ -151,6 +163,7 @@ function addSong(title){
             <a href="#" class="dropdown-item" onclick="loadSong('${title}', 'bass')">bass</a>
         </div>`
     sidebar_list.appendChild(lista)
+
 }
 
 

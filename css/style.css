@@ -57,6 +57,7 @@ nav {
 
 }
 .navbar-nav li a {
+
     text-decoration: none;
     overflow: hidden;
 }
@@ -110,6 +111,10 @@ nav {
     font-family: 'Monsieur La Doulaise', cursive;
     font-size: 65px;
 }
+.dd {
+    color: #a48360;
+}
+
 /*#################*/
 
 form {
