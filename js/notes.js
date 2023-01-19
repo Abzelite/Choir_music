@@ -9,14 +9,23 @@ const note_pic = document.querySelector('.note_pic')
 const ln = document.querySelector('#ln');
 
 
-const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Alleluja', 'Silent night', 'Love', 'Dragonborn (Skyrim Theme)', 'Choir music', 'Soon ah will be done', 'Marsz weselny']
+const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Daemon irrepit callidus', 'Silent night',  'Dragonborn (Skyrim Theme)', 'Psalm 150', 'Soon ah will be done', 'Marsz weselny']
+const songs2 = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny'];
 songs.sort();
 for(let i=0; i<songs.length; i++) {
-    addSong(songs[i])
+    addSong(songs[i]);
 }
+let allList = document.querySelectorAll(".dd")
+for(let i=0; i<songs.length; i++) {
+    for(let j=0; j<songs2.length; j++) {
+        if (allList[i].textContent === songs2[j]) {
+            allList[i].style.color =  '#F5C284FF';
+        }
+    }
+}
+
 note_pic.style.backgroundImage= 'url(../resources/pic_notes/C.png)'
 note_pic.style.display = "block"
-
 
 keys.forEach(key => {
     // console.log(key.dataset.note)
@@ -209,7 +218,7 @@ function addSong(title){
     lista.classList.add("lista_muz")
     lista.style.display = 'block'
     lista.id = title
-    lista.innerHTML = ` <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#">${title}<b class="caret"></b></a>
+    lista.innerHTML = ` <a class="nav-link dropdown-toggle dd"  data-toggle="dropdown" href="#">${title}<b class="caret"></b></a>
         <div class="dropdown-menu">
             <a href="#" class="dropdown-item" onclick="window.location.href = '../index.html'">soprano</a>
             <a href="#" class="dropdown-item" onclick="window.location.href = '../index.html'">alto</a>

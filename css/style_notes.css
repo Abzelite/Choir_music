@@ -1,33 +1,19 @@
-/**::before, *::after {*/
-/*    box-sizing: border-box;*/
-/*}*/
-/*.bod {
-    background-image: url("../resources/images/church.png");
-    background-repeat: no-repeat;
-    background-size: 120%;
 
-}*/
 
 .main_body {
     margin-top: 0;
-    /*min-height: 800px;*/
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 }
 
 .piano {
-    /*margin-top: -300px;*/
     display: flex;
     background-color: #130c09;
-    /*background-image: url("../resources/images/wood.jpg");*/
     padding:20px 100px 35px;
     border-radius: 10px;
     box-shadow: 1px 5px 5px rgba(0,0,0,0.4);
     margin-left: 180px;
-
 }
 
 .inf {
@@ -40,13 +26,11 @@
     height: calc(var(--width)*4);
     width: var(--width) ;
     cursor: pointer;
-
 }
 
 .white {
     --width: 100px;
     color: rgba(0, 0, 0, 0.55);
-    /*height: 400px;*/
     box-shadow: 1px 5px 5px rgba(0,0,0,0.6);
     background-color: white;
     border: 1px solid black;
@@ -84,9 +68,7 @@
 .black {
     box-shadow: 1px 3px 3px rgba(0,0,0,0.4);
     --width: 60px;
-    /*height: 240px;*/
     background-color: #151515;
-
     border: 1px solid black;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -173,14 +155,17 @@ input:checked + .slider:before {
 
 .note_pic {
     transition: 0.2s;
-    /*display: none;*/
     margin: 50px auto;
     justify-content: center;
     text-align: center;
-    height: 300px;
-    width: 600px;
+    height: 350px;
+    width:500px;
     background-image: url("../resources/pic_notes/C.png");
-
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    outline: 4px solid rgba(30, 23, 16, 0.5);
+    outline-offset: 8px;
+   /* border: black 10px solid;*/
 }
 
 .comm {
@@ -189,7 +174,6 @@ input:checked + .slider:before {
     background: #130c09;
     width: fit-content;
     justify-content: center;
-
     outline: 4px solid rgba(89, 68, 43, 0.5);
     outline-offset: -16px;
     border-radius: 35px;
@@ -204,6 +188,9 @@ input:checked + .slider:before {
     display: block;
     margin: auto;
     transition: 0.5s;
+}
+.dd {
+    color: #a48360;
 }
 
 @media only screen and (max-width: 600px) {

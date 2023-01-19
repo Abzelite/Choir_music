@@ -488,8 +488,19 @@ pre {
     right:0px;
 }
 
+.solo_button {
+    position: absolute;
+    top:-10px;
+    right:0px;
+}
+.all_button {
+    position: absolute;
+    top:140px;
+    right:0px;
 
-.solo_button img:hover:active {
+}
+
+/*.solo_button img:hover:active {
     transition-delay: 2s;
     content:url('../resources/images/solo2.png');
     transition: content .3s ease-in-out;
@@ -497,7 +508,7 @@ pre {
 }
 .all_button img:active {
     content:url('../resources/images/all2.png');
-}
+}*/
 .music-timeline {
     margin-top: 50px;
 }
@@ -644,6 +655,13 @@ option:checked {
 .solo_button, .all_voices, #curr_no, #currentNote {
     z-index: 30;
 }
+#solo2, #all{
+    display:none;
+}
+#solo, #all2{
+    display:block;
+}
+
 
 @media only screen and (max-width: 600px) {
     .wrapper .sidebar{

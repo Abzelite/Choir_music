@@ -375,8 +375,10 @@ function setPlaybackRate(el) {
 
 // Buttons changing played voices
 function playAllVoices() {
-    $("#solo").attr('src', './../resources/images/solo.png');
-    $("#all").attr('src', './../resources/images/all2.png');
+    document.querySelector('#all2').style.display = 'block';
+    document.querySelector('#all').style.display = 'none';
+    document.querySelector('#solo2').style.display = 'none';
+    document.querySelector('#solo').style.display = 'block';
     let song = localStorage.getItem("SI");
     let curr_time = audio_song.currentTime;
     audio_song.src = `notes/${song}/${song + '_' + 'all'}.mp3`;
@@ -387,8 +389,12 @@ function playAllVoices() {
 }
 
 function playOneVoice() {
-    $("#solo").attr('src', './../resources/images/solo2.png');
-    $("#all").attr('src', './../resources/images/all.png');
+    /*$("#solo").attr('src', './../resources/images/solo2.png');
+    $("#all").attr('src', './../resources/images/all.png');*/
+    document.querySelector('#all2').style.display = 'none';
+    document.querySelector('#all').style.display = 'block';
+    document.querySelector('#solo2').style.display = 'block';
+    document.querySelector('#solo').style.display = 'none';
     let song = localStorage.getItem("SI");
     let v = localStorage.getItem('VOICE');
     let curr_time = audio_song.currentTime;
