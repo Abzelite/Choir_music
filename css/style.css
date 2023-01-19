@@ -656,10 +656,10 @@ option:checked {
     z-index: 30;
 }
 #solo2, #all{
-    display:none;
+    display:block;
 }
 #solo, #all2{
-    display:block;
+    display:none;
 }
 
 
