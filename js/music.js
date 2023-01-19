@@ -389,8 +389,6 @@ function playAllVoices() {
 }
 
 function playOneVoice() {
-    /*$("#solo").attr('src', './../resources/images/solo2.png');
-    $("#all").attr('src', './../resources/images/all.png');*/
     document.querySelector('#all2').style.display = 'none';
     document.querySelector('#all').style.display = 'block';
     document.querySelector('#solo2').style.display = 'block';
