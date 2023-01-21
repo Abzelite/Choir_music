@@ -52,7 +52,7 @@ let isPlaying = false
 const songs = ['Hallelujah','Ave Maria', 'The Elder Scrolls V', 'And so it goes', 'Requiem d-moll', 'Joy to the world', 'Cantate Domino', 'Daemon irrepit callidus', 'Silent night',  'Dragonborn (Skyrim Theme)', 'Psalm 150', 'Soon ah will be done', 'Marsz weselny']
 const songs2 = ['Hallelujah', 'Soon ah will be done', 'Cantate Domino', 'Dragonborn (Skyrim Theme)', 'Marsz weselny']
 const voices = ['soprano', 'alto', 'tenor', 'bass']
-
+let song2Index = [];
 // Keep track of songs
 songs.sort();
 for(let i=0; i<songs.length; i++) {
@@ -64,6 +64,7 @@ for(let i=0; i<songs.length; i++) {
     for(let j=0; j<songs2.length; j++) {
         if (allList[i].textContent === songs2[j]) {
             allList[i].style.color =  '#F5C284FF'
+            song2Index += songs.indexOf(allList[i].textContent);
         }
     }
 }
@@ -172,19 +173,19 @@ audio_song.onended = function () {
 };
 
 function prevSong() {
-    songIndex--;
-    if(songIndex < 0) {
-        songIndex = songs.length - 1;
+    song2Index--;
+    if(song2Index < 0) {
+        song2Index = songs2.length - 1;
     }
-    loadSong(songs[songIndex], voices[voi]).then();
+    loadSong(songs2[song2Index], voices[voi]).then();
 }
 
 function nextSong() {
-    songIndex++;
-    if(songIndex > songs.length - 1) {
-        songIndex = 0;
+    song2Index++;
+    if(song2Index > songs2.length - 1) {
+        song2Index = 0;
     }
-    loadSong(songs[songIndex], voices[voi]).then();
+    loadSong(songs2[song2Index], voices[voi]).then();
 }
 
 function formatSecondsAsTime(secs, format) {
@@ -280,7 +281,7 @@ function goToEnd() {
     }
 }
 
-// Litening searcher
+// Listening searcher
 const searchEngine = e => {
     const text = e.target.value.toLowerCase();
     let c = 0;
@@ -299,12 +300,12 @@ const searchEngine = e => {
         if(sidebar_list.children.length === c && sidebar.children.length < 4) {
             sidebar.appendChild(info);
         }
-    if (c !== 14 && sidebar.children.length > 3){
+    if (c !== songs.length && sidebar.children.length > 3){
         sidebar.removeChild(sidebar.lastChild);
     }
 }
 
-// Change volume visually
+// Set a volume value
 function handleInputChange(e) {
     let target = e.target;
     if (e.target.type !== 'range') {
@@ -318,6 +319,7 @@ function handleInputChange(e) {
 }
 numberInput.addEventListener('input', handleInputChange);
 
+// Change volume visually
 let old_val
 const volumeControl = document.querySelector("#volume");
 volumeControl.addEventListener("input", (e) => {
@@ -496,7 +498,6 @@ function initAudio(stream) {
 
     mediaStreamSource = context.createMediaStreamSource(stream);
     mediaStreamSource.connect(filter);
-
 }
 
 function stopRecord(stream) {
