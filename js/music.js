@@ -121,6 +121,10 @@ async function loadSong(song, voice) {
         page1.style.display = 'none'
         page2.style.display = 'none'
     }
+    document.querySelector('#all2').style.display = 'none';
+    document.querySelector('#all').style.display = 'block';
+    document.querySelector('#solo2').style.display = 'block';
+    document.querySelector('#solo').style.display = 'none';
 }
 
 let output = false;
