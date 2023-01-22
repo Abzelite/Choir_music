@@ -92,7 +92,7 @@
                     <i class="fas fa-volume-high"></i>
                 </button></label>
                 <input type="range" id="volume" class="control-volume" min="0" max="100" value="1" step="1" oninput="rangevalue.value=value"/>
-                <label for="rangevalue"></label><input type="number" id="rangevalue" value="100" oninput="range.value=value">
+                <label for="rangevalue"></label><input type="number" readonly id="rangevalue" value="100" oninput="range.value=value">
 
                 <label class="pbrate" for="pbrate">playbackrate: </label>
                 <select id="pbrate" class="decorated" onchange="setPlaybackRate(this)">
