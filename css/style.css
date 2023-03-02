@@ -5,7 +5,6 @@
     list-style: none;
     text-decoration: none;
     font-family: 'EB Garamond', serif;
-    /*font-family: 'Sacramento', cursive;*/
 }
 
 body {
@@ -400,15 +399,9 @@ pre {
 }
 
 .music-info {
-    /*background-color: rgba(25, 49, 39, 0.46);*/
-    /*border-radius: 15px 15px 0 0;*/
     position: absolute;
-    /*top: 0;*/
     left: 20%;
     width: 60%;
-    /*opacity: 0;*/
-    /*transform: translateY(0%);*/
-    /*padding: 10px 10px 10px 350px;*/
     transition: transform 0.3s ease-in, opacity 0.3s
     ease-in;
 }
@@ -478,37 +471,27 @@ pre {
 .group_buttons button:last-child{
     position: relative;
     display:block;
-    margin-top: 70px;
+    margin-top: 20px;
 }
 #curr_no{
     color: #c7ad90;
     font-size: 2em;
     position: absolute;
-    top:380px;
-    right:0px;
+    top:360px;
+    right:0;
 }
 
 .solo_button {
     position: absolute;
-    top:-10px;
-    right:0px;
+    top:-30px;
+    right:0;
 }
 .all_button {
     position: absolute;
-    top:140px;
-    right:0px;
-
+    top:120px;
+    right:0;
 }
 
-/*.solo_button img:hover:active {
-    transition-delay: 2s;
-    content:url('../resources/images/solo2.png');
-    transition: content .3s ease-in-out;
-
-}
-.all_button img:active {
-    content:url('../resources/images/all2.png');
-}*/
 .music-timeline {
     margin-top: 50px;
 }
@@ -530,7 +513,6 @@ pre {
 
 input[type="range"] {
     -webkit-appearance: none;
-/*    top: -0px;*/
     width: 100px;
     height: 0;
     background-color: rgba(0,0,0,0.5);
@@ -635,11 +617,11 @@ option:checked {
     font-size: 1.2em;
     text-align: center;
     right:-35px;
-    top:415px
+    top:396px;
 }
 
 .hide_bar {
-    display: none;
+    /*display: none;*/
     background-color: #c1a46c;
     width: 300px;
     z-index: 20;
@@ -650,6 +632,8 @@ option:checked {
     text-align: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+    border-bottom: #3f3324 2px solid;
+    font-family: 'Fondamento', cursiveCambria, serif;
 }
 
 .solo_button, .all_voices, #curr_no, #currentNote {
@@ -661,7 +645,6 @@ option:checked {
 #solo, #all2{
     display:none;
 }
-
 
 @media only screen and (max-width: 600px) {
     .wrapper .sidebar{
@@ -699,6 +682,10 @@ option:checked {
     }
     .solo_button, .all_voices {
         right: 50px;
+    }
+
+    .solo_button {
+        right: 0;
     }
     .book {
         height: 340px;
@@ -739,12 +726,14 @@ option:checked {
     .pbrate {
         margin-left: 10px;
         margin-right: 10px;
-
     }
     .main_content{
         margin-left: 0;
     }
     #search_butt {
         margin-left: 150px;
+    }
+    .music-text {
+        width: 90%;
     }
 }

@@ -233,24 +233,35 @@ function setProgress(e) {
     audio_song.currentTime = (clickX / width) * duration;
     begin_time.value = audio_song.currentTime;
 }
+let d = window.matchMedia("(max-width: 600px)")
+
 function hideSidebar() {
     let sid = document.querySelector('.sidebar');
     if(sid.style.transform === "translate(0px, -960px)" || sid.style.transform === 'translate(0,0)') {
         document.querySelector('.hide_bar').innerText = 'Hide searcher';
-        document.querySelector('.all_button').style.visibility = 'hidden';
-        document.querySelector('.solo_button').style.visibility = 'hidden';
-        document.querySelector('#curr_no').style.visibility = 'hidden';
-        document.querySelector('#currentNote').style.visibility = 'hidden';
+        if(d.matches) {
+            document.querySelector('#all2').style.display = 'hidden';
+            document.querySelector('#solo').style.visibility = 'hidden';
+            document.querySelector('#solo2').style.visibility = 'hidden';
+            document.querySelector('#all').style.visibility = 'hidden';
+
+            document.querySelector('#curr_no').style.visibility = 'hidden';
+            document.querySelector('#currentNote').style.visibility = 'hidden';
+        }
         sid.style.transform = "translate(0,0px)";
     }
     else {
         sid.style.transition = '1.5s';
         sid.style.transform = "translate(0,-960px)";
         document.querySelector('.hide_bar').innerText = 'Show searcher';
-        document.querySelector('.all_button').style.visibility = 'visible';
-        document.querySelector('.solo_button').style.visibility = 'visible';
-        document.querySelector('#curr_no').style.visibility = 'visible';
-        document.querySelector('#currentNote').style.visibility = 'visible';
+        if(d.matches) {
+            document.querySelector('#all').style.visibility = 'visible';
+            document.querySelector('#solo2').style.visibility = 'visible';
+            document.querySelector('#solo').style.visibility = 'visible';
+            document.querySelector('#all2').style.visibility = 'visible';
+            document.querySelector('#curr_no').style.visibility = 'visible';
+            document.querySelector('#currentNote').style.visibility = 'visible';
+        }
     }
 }
 
@@ -542,7 +553,7 @@ stop_rec.onclick = () => {
 }
 
 //https://github.com/ml5js/ml5-library/blob/main/examples/javascript/PitchDetection/PitchDetection/model/group3-shard1of1
-// TONER
+// TUNER
 let stream;
 const scale = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 let currentNote = '';
@@ -574,7 +585,7 @@ function getPitch() {
             const midiNum = freqToMidi(frequency);
             currentNote = scale[midiNum % 12];
             document.querySelector('#currentNote').textContent = currentNote;
-            if (window.screen.width >600) {
+            if (window.screen.width > 600) {
                 if (document.querySelector('#currentNote').textContent.length === 2) {
                     document.querySelector('#currentNote').style.right = '-35px';
                 } else {
@@ -583,9 +594,9 @@ function getPitch() {
             }
             else {
                 if (document.querySelector('#currentNote').textContent.length === 2) {
-                    document.querySelector('#currentNote').style.right = '10px';
+                    document.querySelector('#currentNote').style.right = '-4px';
                 } else {
-                    document.querySelector('#currentNote').style.right = '7px';
+                    document.querySelector('#currentNote').style.right = '0px';
                 }
             }
         }
